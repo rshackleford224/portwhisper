@@ -13,9 +13,8 @@ function startWebsocket() {
    // var socket = new WebSocket('ws://192.168.1.44:1337');
    
 
-const WebSocket = require('ws');
 
-const ws = new WebSocket('wss://immense-island-98531.herokuapp.com');
+var ws = new WebSocket('wss://immense-island-98531.herokuapp.com');
 
 ws.on('open', function open() {
   ws.send('something');
