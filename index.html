@@ -36,13 +36,22 @@ function startWebsocket() {
 		socket.send(scantime);
 		socket.send("\x1b[32m" + "this port seems open!" + evt.target.url + "\x1b[37m");
 		}
+		else if (parseInt(scantime) <= 3000 && parseInt(scantime) >= 2000)
+		{
+                //evt.timeStamp original
+                console.log(scantime);
+                console.log("this host is alive but the port seems dead" + evt.target.url);
+                content.innerHTML += "<h3><p style='color:green'>This host is alive but the port seems dead</h3></p>" + evt.target.url +'<br /><br />';
+                socket.send(scantime);
+                socket.send("\x1b[32m" + "this port seems dead" + evt.target.url + "\x1b[37m");
+		}
 		else
 		{
 		console.log(scantime);
-		console.log("this port appears to be unresponsive..." + evt.target.url);
-		content.innerHTML += "<h3><p style='color:red'>This port appears to be unresponsive...</h3></p>" + evt.target.url +'<br /><br />';
+		console.log("this host and port appear to be unresponsive..." + evt.target.url);
+		content.innerHTML += "<h3><p style='color:red'>This host and port appear to be unresponsive...</h3></p>" + evt.target.url +'<br /><br />';
                 socket.send(scantime);
-		socket.send("\x1b[31m" + "this port appears to be unresponsive..." + evt.target.url + "\x1b[37m");
+		socket.send("\x1b[31m" + "this host and port appear to be unresponsive..." + evt.target.url + "\x1b[37m");
 		}
 	setTimeout("location.reload(true);", 5000)
         };
