@@ -29,7 +29,7 @@ socket.on('request', function(request) {
 
     connection.on('message', function(message) {
         console.log(message.utf8Data);
-      // connection.sendUTF('hello from the server!');
+        connection.sendUTF('hello from the server!');
 
 	/*
         setTimeout(function() {
