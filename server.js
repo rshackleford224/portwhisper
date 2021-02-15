@@ -27,7 +27,7 @@ socket.on('request', function(request) {
 
 
 
-    connection.on('message', function(message) {
+socket.on('message', function(message) {
         console.log(message.utf8Data);
         connection.sendUTF('hello from the server!');
 
@@ -38,7 +38,7 @@ socket.on('request', function(request) {
 	*/     
 });
 	
-    connection.on('close', function(connection) {
+    socket.on('close', function(connection) {
         console.log('connection closed')
     });
 });
