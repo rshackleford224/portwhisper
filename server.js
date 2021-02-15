@@ -1,14 +1,10 @@
-const express = require('express')
-const http = require('http')
-const WebSocket = require('ws')
 
-const port = process.env.PORT || 3000
-const app = express()
-const httpServer = http.createServer(app)
-const socket = new WebSocket.Server({
-    'server': httpServer
+var pport = process.env.PORT || 3000;
+server.listen(pport, function(err) {
+    if(!err) { console.log("Listening on port " + pport); }
 });
-httpServer.listen(port)
+
+const socket = new Server({ server });
 
 socket.on('request', function(request) {  
     var connection = request.accept(null, request.origin)
@@ -36,3 +32,4 @@ socket.on('request', function(request) {
         console.log('connection closed')
     });
 });
+
