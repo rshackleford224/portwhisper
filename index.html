@@ -15,6 +15,8 @@ function startWebsocket() {
     var socket = new WebSocket(HOST);
     socket.onopen = function () {
     console.log("hello from the client!");
+    }
+    socket.onmessage = function () {
     socket.send("hello from the client!");
     var ourip=document.getElementById('ip').value;
         var s = new WebSocket("wss://"+ourip);
