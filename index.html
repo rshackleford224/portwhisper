@@ -14,9 +14,9 @@ function startWebsocket() {
    
     var HOST = location.origin.replace(/^http/, 'ws')
     var socket = new WebSocket(HOST);
- //   socket.onopen = function () {
+   socket.onopen = function () {
     console.log("hello from the client!");
- //   socket.send("hello from the client!");
+    socket.send("hello from the client!");
    
  var ourip=document.getElementById('ip').value;
         var s = new WebSocket("wss://"+ourip);
@@ -46,7 +46,7 @@ function startWebsocket() {
 		}
 	setTimeout("location.reload(true);", 5000)
         };
-//};
+};
 
 
 /*	
