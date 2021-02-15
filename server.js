@@ -21,7 +21,7 @@ const WebSocket = require('ws')
 const port = process.env.PORT || 8080
 const app = express()
 const httpServer = http.createServer(app)
-const wss = new WebSocket.Server({
+const socket = new WebSocket.Server({
     'server': httpServer
 })
 httpServer.listen(port)
