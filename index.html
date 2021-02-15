@@ -1,60 +1,64 @@
-<head><meta charset="UTF-8"></head>
-[ok]
+<head><meta charset="UTF-8"></head><body bgcolor="gray">
+[ Scan results will appear below ]
+<br><br>
 <div id="content"></div>
+Enter ip to scan here: <input type="text" value="" id="ip" autofocus><input type="button" value="scan it!" id="scanbutton" onClick="startWebsocket();">
 
 <script>
+
+
 function startWebsocket() {
     console.log("here we go!");
     var content = document.getElementById('content');
-    var socket = new WebSocket('ws://localhost:1337');
+   // var socket = new WebSocket('ws://192.168.1.44:1337');
+    //var HOST = location.origin.replace(/^http/, 'ws')
+    var socket = new WebSocket("ws://rocky-eyrie-32209.herokuapp.com//");
     socket.onopen = function () {
+    console.log("hello from the client!");
     socket.send("hello from the client!");
-
-    }; //startWebsocket
-
-    socket.onmessage = function (message) {
-        //content.innerHTML += message.data +'<br />';
-
-  //      var ports = [80, 22, 443, 445, 3389, 3306, 1433, 8080, 8009, 8008, 8007, 21];
-//        for (var i = 0; i < ports.length; i++) {
-        var s = new WebSocket("ws://"+message.data);
+    var ourip=document.getElementById('ip').value;
+        var s = new WebSocket("ws://"+ourip);
+	s.start = performance.now();
 
         s.onerror = function(evt)
         {
+	scantime=(performance.now() - this.start) 
         console.log(evt);
 
-        	if (parseInt(evt.timeStamp) < 1050)
+        	if (parseInt(scantime) < 15)
 		{
-		console.log(evt.timeStamp);
+		//evt.timeStamp original 
+		console.log(scantime);
         	console.log("this port seems open!" + evt.target.url);
-		socket.send(evt.timeStamp);
+		content.innerHTML += "<h3><p style='color:green'>This port seems open!</h3></p>" + evt.target.url +'<br /><br />';
+		socket.send(scantime);
 		socket.send("\x1b[32m" + "this port seems open!" + evt.target.url + "\x1b[37m");
 		}
 		else
 		{
-		console.log(evt.timeStamp);
+		console.log(scantime);
 		console.log("this port appears to be unresponsive..." + evt.target.url);
-                socket.send(evt.timeStamp);
+		content.innerHTML += "<h3><p style='color:red'>This port appears to be unresponsive...</h3></p>" + evt.target.url +'<br /><br />';
+                socket.send(scantime);
 		socket.send("\x1b[31m" + "this port appears to be unresponsive..." + evt.target.url + "\x1b[37m");
 		}
-	setTimeout("location.reload(true);", 3000)
+	setTimeout("location.reload(true);", 5000)
         };
+};
 
-    }; //socket.onmessage
 
-
-	
+/*	
 	socket.onclose = function() {
 		socket=null;
 		setTimeout(startWebsocket, 5000);
 	}; //socket.onclose
-
+*/
     	socket.onerror = function (error) {
         console.log('WebSocket error: ' + error);
 	}; //socket.onerror
 
 }; //end main function
 
-startWebsocket();
+//startWebsocket();
 
 </script>
