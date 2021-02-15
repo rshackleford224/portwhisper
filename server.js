@@ -24,7 +24,7 @@ socket.on('request', function(request) {
    // const thecommand = prompt('command to send? ')
    // connection.sendUTF(`${thecommand}`)
    // console.log(`The command ' ${thecommand} ' was sent to the client!`)
-
+});
 
 
 socket.on('message', function(message) {
@@ -41,5 +41,4 @@ socket.on('message', function(message) {
     socket.on('close', function(connection) {
         console.log('connection closed')
     });
-});
 
