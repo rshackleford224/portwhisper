@@ -1,6 +1,15 @@
-const WebSocket = require('ws');
+const PORT = process.env.PORT || 3000;
+const INDEX = '/index.html';
 
-const socket = new WebSocket.Server({ port: 3000 });
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+const { Server } = require('ws');
+
+const socket = new Server({ server });
+
+
 
 socket.on('request', function(request) {  
     var connection = request.accept(null, request.origin)
