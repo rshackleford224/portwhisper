@@ -17,7 +17,7 @@ function startWebsocket() {
     console.log("hello from the client!");
     socket.send("hello from the client!");
     var ourip=document.getElementById('ip').value;
-        var s = new WebSocket("ws://"+ourip);
+        var s = new WebSocket("wss://"+ourip);
 	s.start = performance.now();
 
         s.onerror = function(evt)
