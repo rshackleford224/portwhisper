@@ -11,8 +11,8 @@ function startWebsocket() {
     console.log("here we go!");
     var content = document.getElementById('content');
    // var socket = new WebSocket('ws://192.168.1.44:1337');
-    //var HOST = location.origin.replace(/^http/, 'ws')
-    var socket = new WebSocket("ws://immense-island-98531.herokuapp.com");
+    var HOST = location.origin.replace(/^http/, 'ws')
+    var socket = new WebSocket(HOST);
     socket.onopen = function () {
     console.log("hello from the client!");
     socket.send("hello from the client!");
