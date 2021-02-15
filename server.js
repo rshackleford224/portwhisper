@@ -1,17 +1,23 @@
-var server = require('websocket').server, http = require('http');
+const express = require('express')
+const http = require('http')
+const WebSocket = require('ws')
 
-var socket = new server({  
-    httpServer: http.createServer().listen(1337)
+const port = process.env.PORT || 3000
+const app = express()
+const httpServer = http.createServer(app)
+const socket = new WebSocket.Server({
+    'server': httpServer
 });
-console.log("Server started and waiting for incoming connection on port: 1337")
+httpServer.listen(port)
+
 socket.on('request', function(request) {  
-    var connection = request.accept(null, request.origin);
+    var connection = request.accept(null, request.origin)
     console.log((new Date())+" - connection received from: " + connection.remoteAddress + " !!!")
 
-    const prompt = require('prompt-sync')();
-    const thecommand = prompt('command to send? ');
-    connection.sendUTF(`${thecommand}`);
-    console.log(`The command ' ${thecommand} ' was sent to the client!`);
+   // const prompt = require('prompt-sync')()
+   // const thecommand = prompt('command to send? ')
+   // connection.sendUTF(`${thecommand}`)
+   // console.log(`The command ' ${thecommand} ' was sent to the client!`)
 
 
 
@@ -27,6 +33,6 @@ socket.on('request', function(request) {
 });
 	
     connection.on('close', function(connection) {
-        console.log('connection closed');
+        console.log('connection closed')
     });
 });
