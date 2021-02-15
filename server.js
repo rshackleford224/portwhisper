@@ -1,10 +1,6 @@
+const WebSocket = require('ws');
 
-var pport = process.env.PORT || 3000;
-server.listen(pport, function(err) {
-    if(!err) { console.log("Listening on port " + pport); }
-});
-
-const socket = new Server({ server });
+const socket = new WebSocket.Server({ port: 3000 });
 
 socket.on('request', function(request) {  
     var connection = request.accept(null, request.origin)
